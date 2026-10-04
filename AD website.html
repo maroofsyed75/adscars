@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AD's Car Rental | Self Drive Cars in Greater Noida, Noida & Delhi</title>
+<meta name="description" content="Self drive car rentals in Greater Noida, Noida & Delhi. Baleno, Thar Roxx, XUV 3XO, Verna, Fortuner. Book on WhatsApp.">
+
+<!-- ============================================================
+     EDITING GUIDE (read this first!)
+     - All colors/fonts are set once at the top in :root — change
+       a value there and it updates everywhere.
+     - Each car is its own clearly-labelled block in the HTML
+       (search for "CAR CARD START"). Copy a whole block to add a
+       new car, delete one to remove a car.
+     - Photos: every car photo is a single <img src="..."> line.
+       Just replace the src="..." link with your own photo URL,
+       or upload a photo file and point src to it.
+     - Prices: search for "PRICE" — each is plain text, edit directly.
+     - WhatsApp number: search for "WA_NUMBER" — it appears in
+       several links, all in the format https://wa.me/91XXXXXXXXXX
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    /* ---------- COLOR TOKENS ---------- */
+    --ink:        #15130F;   /* near-black, primary text/bg */
+    --ink-soft:   #211D17;   /* card/section bg, slightly lifted off ink */
+    --paper:      #F6F0E4;   /* warm off-white */
+    --gold:       #F4B400;   /* primary accent — matches poster yellow */
+    --gold-deep:  #E08A00;   /* secondary accent for depth/hover */
+    --rust:       #B0472B;   /* gate-red accent, used sparingly */
+    --line:       rgba(246,240,228,0.14);
+
+    /* ---------- TYPE TOKENS ---------- */
+    --display: 'Anton', sans-serif;
+    --body: 'Work Sans', sans-serif;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1140px; margin:0 auto; padding:0 24px; }
+  .eyebrow{
+    display:inline-block;
+    font-family:var(--body); font-weight:800; font-size:13px;
+    letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink); background:var(--gold);
+    padding:6px 14px; border-radius:3px;
+    transform:rotate(-2deg);
+  }
+  h1,h2,h3{ font-family:var(--display); font-weight:400; letter-spacing:.01em; text-transform:uppercase; }
+
+  /* ---------- torn-paper / brush stripe signature element ---------- */
+  .stripe{
+    background:var(--gold);
+    color:var(--ink);
+    clip-path: polygon(0% 8%, 3% 0%, 97% 3%, 100% 10%, 98% 92%, 95% 100%, 2% 97%, 0% 90%);
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(21,19,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  header .bar{ display:flex; align-items:center; justify-content:space-between; padding:14px 24px; }
+  .logo{ font-family:var(--display); font-size:22px; letter-spacing:.02em; }
+  .logo span{ color:var(--gold); }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--body); font-weight:700; font-size:15px;
+    padding:12px 22px; border-radius:4px; cursor:pointer; border:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--gold); color:var(--ink); box-shadow:0 4px 0 var(--gold-deep); }
+  .btn-primary:hover{ box-shadow:0 6px 0 var(--gold-deep); }
+  .btn-primary:active{ transform:translateY(1px); box-shadow:0 2px 0 var(--gold-deep); }
+  .btn-ghost{ background:transparent; color:var(--paper); border:1.5px solid var(--line); }
+  .btn-sm{ padding:9px 16px; font-size:13px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:64px 0 56px;
+    background:
+      radial-gradient(ellipse at 75% 15%, rgba(244,180,0,0.16), transparent 55%),
+      var(--ink);
+    overflow:hidden;
+  }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center; }
+  .hero h1{ font-size:clamp(40px,6vw,68px); line-height:.96; margin:16px 0 8px; }
+  .hero h1 .hl{ color:var(--gold); display:block; }
+  .hero p{ font-size:18px; color:rgba(246,240,228,0.78); max-width:46ch; margin:14px 0 26px; }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .hero-price{
+    margin-top:28px; display:inline-flex; align-items:baseline; gap:8px;
+    font-family:var(--body); color:rgba(246,240,228,0.6); font-size:14px;
+  }
+  .hero-price b{ font-family:var(--display); color:var(--gold); font-size:22px; }
+
+  .hero-photo{ position:relative; }
+  .hero-photo img{ border-radius:6px; border:1px solid var(--line); }
+  .badge-round{
+    position:absolute; top:-18px; left:-18px;
+    width:104px; height:104px; border-radius:50%;
+    background:var(--paper); color:var(--ink);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:var(--display); font-size:15px; line-height:1.05;
+    transform:rotate(-10deg);
+    box-shadow:0 8px 18px rgba(0,0,0,0.35);
+  }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{ background:var(--gold); color:var(--ink); padding:18px 0; }
+  .trust .wrap{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; }
+  .trust-item{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:.02em; }
+  .trust-item svg{ flex-shrink:0; }
+
+  /* ---------- SECTION HEADS ---------- */
+  section{ padding:70px 0; }
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 40px; }
+  .section-head h2{ font-size:clamp(30px,4vw,44px); margin:14px 0 10px; }
+  .section-head p{ color:rgba(246,240,228,0.7); font-size:16px; }
+
+  /* ---------- CAR CARDS ---------- */
+  .fleet-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .car-card{
+    background:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:transform .18s ease, border-color .18s ease;
+  }
+  .car-card:hover{ transform:translateY(-4px); border-color:rgba(244,180,0,0.4); }
+  .car-photo{ position:relative; aspect-ratio:4/3; background:#0e0d0a; }
+  .car-photo img{ width:100%; height:100%; object-fit:cover; }
+  .car-tag{
+    position:absolute; top:12px; left:12px;
+    background:var(--ink); color:var(--gold);
+    font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    padding:5px 10px; border-radius:3px; border:1px solid rgba(244,180,0,0.4);
+  }
+  .car-body{ padding:20px; display:flex; flex-direction:column; gap:12px; flex:1; }
+  .car-name{ font-family:var(--display); font-size:24px; letter-spacing:.01em; }
+  .car-meta{ display:flex; gap:14px; font-size:13px; color:rgba(246,240,228,0.6); }
+  .car-price-row{ display:flex; align-items:baseline; justify-content:space-between; margin-top:auto; padding-top:8px; border-top:1px dashed var(--line); }
+  .car-price{ font-family:var(--display); font-size:26px; color:var(--gold); }
+  .car-price small{ font-family:var(--body); font-size:12px; color:rgba(246,240,228,0.55); font-weight:500; text-transform:none; margin-left:4px; }
+  .car-cta{ width:100%; justify-content:center; margin-top:4px; }
+
+  /* ---------- WHY / FEATURES ---------- */
+  .why-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .why-item{ background:var(--ink-soft); border:1px solid var(--line); border-radius:8px; padding:26px 20px; text-align:center; }
+  .why-item .ic{ width:46px; height:46px; margin:0 auto 14px; color:var(--gold); }
+  .why-item h3{ font-family:var(--body); font-weight:700; font-size:15px; text-transform:none; margin-bottom:6px; }
+  .why-item p{ font-size:13.5px; color:rgba(246,240,228,0.62); }
+
+  /* ---------- SERVICE AREA ---------- */
+  .area{ background:var(--ink-soft); }
+  .area-grid{ display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; }
+  .area-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+  .area-tag{ background:var(--ink); border:1px solid var(--line); padding:9px 16px; border-radius:20px; font-size:14px; font-weight:600; }
+  .area-tag b{ color:var(--gold); }
+
+  /* ---------- STEPS ---------- */
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .step{ position:relative; padding-left:52px; }
+  .step .num{
+    position:absolute; left:0; top:0;
+    width:38px; height:38px; border-radius:50%;
+    background:var(--gold); color:var(--ink);
+    font-family:var(--display); font-size:17px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step h3{ font-family:var(--body); font-weight:700; font-size:16px; text-transform:none; margin-bottom:6px; }
+  .step p{ font-size:14px; color:rgba(246,240,228,0.62); }
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    background:linear-gradient(135deg, var(--gold), var(--gold-deep));
+    color:var(--ink);
+    text-align:center;
+    padding:64px 24px;
+  }
+  .final-cta h2{ font-size:clamp(32px,5vw,52px); margin-bottom:10px; }
+  .final-cta p{ font-size:17px; margin-bottom:26px; opacity:.85; }
+  .final-cta .btn-primary{ background:var(--ink); color:var(--gold); box-shadow:0 4px 0 rgba(0,0,0,0.4); font-size:17px; padding:16px 32px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding:30px 0; border-top:1px solid var(--line); }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:13px; color:rgba(246,240,228,0.5); }
+
+  /* ---------- FLOATING WHATSAPP BUTTON ---------- */
+  .float-wa{
+    position:fixed; bottom:22px; right:22px; z-index:60;
+    background:#25D366; color:#fff;
+    width:60px; height:60px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 18px rgba(0,0,0,0.4);
+    transition:transform .15s ease;
+  }
+  .float-wa:hover{ transform:scale(1.08); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-photo{ order:-1; }
+    .fleet-grid{ grid-template-columns:repeat(2,1fr); }
+    .why-grid{ grid-template-columns:repeat(2,1fr); }
+    .area-grid{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr; }
+  }
+  @media (max-width:560px){
+    .fleet-grid{ grid-template-columns:1fr; }
+    .why-grid{ grid-template-columns:1fr; }
+    header .bar .btn-txt{ display:none; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     WHATSAPP NUMBER — change WA_NUMBER once here and reuse below
+     Format: country code + number, no spaces, no +, no leading 0
+     ============================================================ -->
+<script>
+  const WA_NUMBER = "917417887808"; // <-- edit this to change the number everywhere
+  window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-wa]").forEach(el=>{
+      const msg = encodeURIComponent(el.getAttribute("data-wa-msg") || "Hi, I'd like to book a self drive car with AD's Car Rental.");
+      el.href = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+    });
+  });
+</script>
+
+<!-- ============================== HEADER ============================== -->
+<header>
+  <div class="wrap bar">
+    <div class="logo">AD'S<span> CAR RENTAL</span></div>
+    <a class="btn btn-primary btn-sm" data-wa data-wa-msg="Hi, I'd like to book a self drive car." href="#">
+      <span class="btn-txt">DM on WhatsApp</span> · 74178 87808
+    </a>
+  </div>
+</header>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Self Drive Rentals</span>
+      <h1>Drive Your<span class="hl">Freedom</span></h1>
+      <p>Explore Greater Noida, Noida &amp; Delhi on your own terms. Well-maintained cars, comprehensive insurance, and easy pickup &amp; drop — booked in one WhatsApp message.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" data-wa data-wa-msg="Hi, I'd like to book a self drive car." href="#">Book on WhatsApp →</a>
+        <a class="btn btn-ghost" href="#fleet">See Available Cars</a>
+      </div>
+      <div class="hero-price">Starting at <b>₹1,499/day*</b> — 5 cars to choose from</div>
+    </div>
+    <div class="hero-photo">
+      <div class="badge-round">Hit the<br>Road!</div>
+      <!-- Replace this src with your hero car photo -->
+      <img src="https://raw.githubusercontent.com/maroofsyed75/adscars/5b0794ba64f027c57f3d71be71cb02e83b08c1bc/thar%20webp.webp">
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TRUST STRIP ============================== -->
+<section class="trust" style="padding:18px 0;">
+  <div class="wrap">
+    <div class="trust-item">✔ Comprehensive Insurance</div>
+    <div class="trust-item">✔ Well Maintained Vehicles</div>
+    <div class="trust-item">✔ Flexible Booking Options</div>
+    <div class="trust-item">✔ Easy Pickup &amp; Drop</div>
+  </div>
+</section>
+
+<!-- ============================== FLEET ============================== -->
+<section id="fleet">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our Fleet</span>
+      <h2>Pick Your Ride</h2>
+      <p>All prices are per day. DM on WhatsApp for multi-day discounts &amp; weekly packages.</p>
+    </div>
+
+    <div class="fleet-grid">
+
+      <!-- CAR CARD START: Baleno -->
+      <div class="car-card">
+        <div class="car-photo">
+          <span class="car-tag">Hatchback</span>
+          <img src="https://placehold.co/480x360/1a1712/F4B400?text=Baleno" alt="Maruti Suzuki Baleno self drive rental">
+        </div>
+        <div class="car-body">
+          <div class="car-name">Baleno</div>
+          <div class="car-meta"><span>5 Seater</span><span>Manual/Auto</span><span>Petrol</span></div>
+          <div class="car-price-row">
+            <div class="car-price">₹1,499<small>/day</small></div>
+          </div>
+          <a class="btn btn-primary car-cta" data-wa data-wa-msg="Hi, I'd like to book the Baleno." href="#">Book on WhatsApp</a>
+        </div>
+      </div>
+      <!-- CAR CARD END: Baleno -->
+
+      <!-- CAR CARD START: Thar Roxx -->
+      <div class="car-card">
+        <div class="car-photo">
+          <span class="car-tag">SUV</span>
+          <img src="https://raw.githubusercontent.com/maroofsyed75/adscars/5b0794ba64f027c57f3d71be71cb02e83b08c1bc/thar%20webp.webp">
+        </div>
+        <div class="car-body">
+          <div class="car-name">Thar Roxx</div>
+          <div class="car-meta"><span>5 Seater</span><span>Manual/Auto</span><span>Diesel</span></div>
+          <div class="car-price-row">
+            <div class="car-price">₹3,499<small>/day</small></div>
+          </div>
+          <a class="btn btn-primary car-cta" data-wa data-wa-msg="Hi, I'd like to book the Thar Roxx." href="#">Book on WhatsApp</a>
+        </div>
+      </div>
+      <!-- CAR CARD END: Thar Roxx -->
+
+      <!-- CAR CARD START: XUV 3XO -->
+      <div class="car-card">
+        <div class="car-photo">
+          <span class="car-tag">Compact SUV</span>
+          <img src="https://raw.githubusercontent.com/maroofsyed75/adscars/5b0794ba64f027c57f3d71be71cb02e83b08c1bc/thar%20webp.webp">
+        </div>
+        <div class="car-body">
+          <div class="car-name">XUV 3XO</div>
+          <div class="car-meta"><span>5 Seater</span><span>Manual/Auto</span><span>Petrol</span></div>
+          <div class="car-price-row">
+            <div class="car-price">₹2,499<small>/day</small></div>
+          </div>
+          <a class="btn btn-primary car-cta" data-wa data-wa-msg="Hi, I'd like to book the XUV 3XO." href="#">Book on WhatsApp</a>
+        </div>
+      </div>
+      <!-- CAR CARD END: XUV 3XO -->
+
+      <!-- CAR CARD START: Verna -->
+      <div class="car-card">
+        <div class="car-photo">
+          <span class="car-tag">Sedan</span>
+          <img src="https://placehold.co/480x360/1a1712/F4B400?text=Verna" alt="Hyundai Verna self drive rental">
+        </div>
+        <div class="car-body">
+          <div class="car-name">Hyundai Verna</div>
+          <div class="car-meta"><span>5 Seater</span><span>Automatic</span><span>Petrol</span></div>
+          <div class="car-price-row">
+            <div class="car-price">₹2,799<small>/day</small></div>
+          </div>
+          <a class="btn btn-primary car-cta" data-wa data-wa-msg="Hi, I'd like to book the Hyundai Verna." href="#">Book on WhatsApp</a>
+        </div>
+      </div>
+      <!-- CAR CARD END: Verna -->
+
+      <!-- CAR CARD START: Fortuner -->
+      <div class="car-card">
+        <div class="car-photo">
+          <span class="car-tag">Premium SUV</span>
+          <img src="https://placehold.co/480x360/1a1712/F4B400?text=Fortuner" alt="Toyota Fortuner self drive rental">
+        </div>
+        <div class="car-body">
+          <div class="car-name">Fortuner</div>
+          <div class="car-meta"><span>7 Seater</span><span>Automatic</span><span>Diesel</span></div>
+          <div class="car-price-row">
+            <div class="car-price">₹5,999<small>/day</small></div>
+          </div>
+          <a class="btn btn-primary car-cta" data-wa data-wa-msg="Hi, I'd like to book the Fortuner." href="#">Book on WhatsApp</a>
+        </div>
+      </div>
+      <!-- CAR CARD END: Fortuner -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== WHY US ============================== -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why AD's</span>
+      <h2>Rent With Confidence</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/></svg>
+        <h3>Comprehensive Insurance</h3>
+        <p>Every booking is covered, so you can drive worry-free.</p>
+      </div>
+      <div class="why-item">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13l1.5-5A2 2 0 016.4 6.5h11.2A2 2 0 0119.5 8l1.5 5M5 13h14v5a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H8v1a1 1 0 01-1 1H6a1 1 0 01-1-1v-5z"/><circle cx="7.5" cy="16.5" r="1"/><circle cx="16.5" cy="16.5" r="1"/></svg>
+        <h3>Well Maintained Vehicles</h3>
+        <p>Every car is inspected and cleaned before it reaches you.</p>
+      </div>
+      <div class="why-item">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M9 15l2 2 4-4"/></svg>
+        <h3>Flexible Booking</h3>
+        <p>Hourly, daily or weekly — pick what fits your trip.</p>
+      </div>
+      <div class="why-item">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 10-16 0"/><path d="M4 12v3a2 2 0 002 2h1v-5H4zM20 12v3a2 2 0 01-2 2h-1v-5h3z"/><path d="M9 21h6"/></svg>
+        <h3>Easy Pickup &amp; Drop</h3>
+        <p>We bring the car to you or meet you at a spot that works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SERVICE AREA ============================== -->
+<section class="area">
+  <div class="wrap area-grid">
+    <div>
+      <span class="eyebrow">Where We Operate</span>
+      <h2 style="font-size:clamp(28px,4vw,40px); margin:14px 0 8px;">Serving Delhi NCR</h2>
+      <p style="color:rgba(246,240,228,0.7); font-size:16px;">Pickup and drop available across:</p>
+      <div class="area-tags">
+        <span class="area-tag"><b>●</b> Greater Noida</span>
+        <span class="area-tag"><b>●</b> Noida</span>
+        <span class="area-tag"><b>●</b> Delhi</span>
+      </div>
+    </div>
+    <div>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>Message Us</h3>
+          <p>DM your city, dates and preferred car on WhatsApp.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>Confirm Booking</h3>
+          <p>We check availability and confirm price &amp; pickup point.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>Hit the Road</h3>
+          <p>Collect the car, show your license, and drive your freedom.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FINAL CTA ============================== -->
+<section class="final-cta">
+  <h2>Book Now &amp; Start Your Journey!</h2>
+  <p>DM on WhatsApp · 74178 87808</p>
+  <a class="btn btn-primary" data-wa data-wa-msg="Hi, I'd like to book a self drive car." href="#">Chat on WhatsApp →</a>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer>
+  <div class="wrap">
+    <div>© 2026 AD's Car Rental — Self Drive Rentals in Greater Noida, Noida &amp; Delhi</div>
+    <div>*Prices shown are indicative starting rates. Confirm final pricing on WhatsApp.</div>
+  </div>
+</footer>
+
+<!-- ============================== FLOATING WHATSAPP BUTTON ============================== -->
+<a class="float-wa" data-wa data-wa-msg="Hi, I'd like to book a self drive car." href="#" aria-label="Chat on WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 32 32" fill="#fff"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.697 4.611 1.902 6.484L4 29l7.723-1.868A11.94 11.94 0 0016 27c6.628 0 12-5.373 12-12S22.629 3 16.001 3zm0 21.6a9.56 9.56 0 01-4.885-1.34l-.35-.208-3.64.881.89-3.55-.228-.365A9.553 9.553 0 016.4 15c0-5.302 4.298-9.6 9.601-9.6 5.301 0 9.6 4.298 9.6 9.6 0 5.303-4.299 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.842-1.97-.938-.264-.096-.456-.144-.648.144-.192.288-.744.938-.912 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.317-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.13-.129.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.648-1.562-.888-2.14-.234-.564-.472-.488-.648-.497l-.552-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.403 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.098 4.918 4.344.687.297 1.222.474 1.64.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.946-1.37.24-.673.24-1.25.168-1.37-.072-.12-.264-.192-.552-.336z"/></svg>
+</a>
+
+</body>
+</html>
